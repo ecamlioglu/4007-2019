@@ -1,0 +1,26 @@
+#include <Wire.h> 
+#include <LiquidCrystal_I2C_AvrI2C.h>
+
+LiquidCrystal_I2C_AvrI2C lcd(0x27, 16, 2);
+const int analogPin = A0;
+float voltageValue = 0;
+float sensorValue = 0;
+float tempValue = 0;
+ 
+void setup() {
+  lcd.begin();  
+  lcd.print("BILFEST 2019"); // Our competition name :)  
+}
+ 
+void loop() {
+  sensorValue = analogRead(analogPin);
+  //this values calculate celsius
+  voltageValue = (sensorValue/1023)*5000;
+  tempValue = voltageValue / 10.0;
+
+  lcd.setCursor(1,1);
+  lcd.print(tempValue);
+  lcd.print(" C"); // we use Celsius
+ 
+  delay(1000);
+}
