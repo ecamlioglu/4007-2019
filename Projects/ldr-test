@@ -1,0 +1,18 @@
+#define led 3;
+
+void setup() {
+    pinMode(led,OUTPUT); 
+    Serial.begin(9600); 
+}
+
+void loop() {
+  int lights = analogRead(A0); //ldr pin
+  Serial.println(lights); 
+  delay(50);
+  if(lights > 230){ 
+    digitalWrite(led,LOW); 
+  }
+  else{
+    digitalWrite(led,HIGH);  
+  } 
+}
