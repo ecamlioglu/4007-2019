@@ -1,0 +1,28 @@
+#include  <LiquidCrystal_I2C_AvrI2C.h>                  
+int trigPin = 7;                                        
+int echoPin = 6;                                        
+int timee;                                               
+int distance;                                            
+LiquidCrystal_I2C_AvrI2C lcd(0x27, 16, 2);
+ void setup() {
+   pinMode(trigPin, OUTPUT);                           
+   pinMode(echoPin,INPUT);                             
+   lcd.begin();                                                                    
+ }
+ void loop() {
+   digitalWrite(trigPin, LOW);                           
+   delayMicroseconds(5);
+   digitalWrite(trigPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(trigPin, LOW);
+   timee = pulseIn(echoPin, HIGH, 11600); //this calculated value
+   //we calculate meters                
+   distance= timee*0.0345/2;                               
+   lcd.clear();                                          
+   lcd.setCursor(0, 0);                                        
+   lcd.print("distance:");                                
+   lcd.setCursor(0, 1);                                  
+   lcd.print(distance);                                   
+   lcd.print("cm");
+   delay(250); // delay
+ } 
